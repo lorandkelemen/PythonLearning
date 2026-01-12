@@ -38,3 +38,4 @@ print(f"your generated password is: {password}")
 #hard version - use shuffle
 shuffled_pass = string_utils.shuffle(password)
 print(f"your hard pass: is: {shuffled_pass}")
+    
