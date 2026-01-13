@@ -1,29 +1,38 @@
 import random
-world_list = ["goat","dog","human"]
+word_list = ["goat","dog","human","alcatras"]
 
-lives = 5
+word = random.choice(word_list)
 
-#print(random.choice(world_list))
-word = random.choice(world_list)
-word_length = len(word)
-display = ""
-for letter in word:
-    display += "_"
-print(f"your word is {display} \n")
+won = False
 
-guess = input("Guess a letter: ").lower()
-
-display = ""
-for char in word:
-    if guess == char:
-        display +=char
-    else:
-        display +="_"
-
+display = "_" * len(word)
+lives = 3
 print(display)
 
-#todo
-#ask user to input letter
+guesses = set()
 
-#todo 2
-#check if in word, if yes x if no y
+while not won:
+    guess = input("What is your guess?")
+    if guess in guesses:
+        print("you already guessed that letter")
+        continue
+    guesses.add(guess)
+
+    display =""
+    for letter in word:
+        if letter in guesses:
+            display = display + letter
+        else:
+            display += "_"
+    if guess not in word:
+        lives -= 1
+        print(f"you lost a life. Lives left: {lives}")
+    print(display)
+
+    if "_" not in display:
+        won = True
+        print("YOU WON THE GAME!")
+    if lives == 0:
+        won = False
+        print("GAME OVER")
+        break
